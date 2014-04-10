@@ -103,10 +103,10 @@ class moodle1_mod_page_kals_handler extends moodle1_resource_successor_handler {
         $page['content'] = moodle1_converter::migrate_referenced_files($page['content'], $this->fileman);
 
         // write page.xml
-        $this->open_xml_writer("activities/page_{$moduleid}/page.xml");
+        $this->open_xml_writer("activities/page_kals_{$moduleid}/page_kals.xml");
         $this->xmlwriter->begin_tag('activity', array('id' => $instanceid, 'moduleid' => $moduleid,
             'modulename' => 'page_kals', 'contextid' => $contextid));
-        $this->write_xml('page', $page, array('/page/id'));
+        $this->write_xml('page_kals', $page, array('/page_kals/id'));
         $this->xmlwriter->end_tag('activity');
         $this->close_xml_writer();
 

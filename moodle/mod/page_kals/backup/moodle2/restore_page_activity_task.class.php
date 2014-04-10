@@ -44,7 +44,7 @@ class restore_page_activity_task extends restore_activity_task {
      */
     protected function define_my_steps() {
         // label only has one structure step
-        $this->add_step(new restore_page_activity_structure_step('page_structure', 'page.xml'));
+        $this->add_step(new restore_page_kals_activity_structure_step('page_kals_structure', 'page_kals.xml'));
     }
 
     /**
@@ -54,7 +54,7 @@ class restore_page_activity_task extends restore_activity_task {
     static public function define_decode_contents() {
         $contents = array();
 
-        $contents[] = new restore_decode_content('page', array('intro', 'content'), 'page');
+        $contents[] = new restore_decode_content('page_kals', array('intro', 'content'), 'page_kals');
 
         return $contents;
     }
@@ -82,9 +82,9 @@ class restore_page_activity_task extends restore_activity_task {
     static public function define_restore_log_rules() {
         $rules = array();
 
-        $rules[] = new restore_log_rule('page', 'add', 'view.php?id={course_module}', '{page}');
-        $rules[] = new restore_log_rule('page', 'update', 'view.php?id={course_module}', '{page}');
-        $rules[] = new restore_log_rule('page', 'view', 'view.php?id={course_module}', '{page}');
+        $rules[] = new restore_log_rule('page_kals', 'add', 'view.php?id={course_module}', '{page_kals}');
+        $rules[] = new restore_log_rule('page_kals', 'update', 'view.php?id={course_module}', '{page_kals}');
+        $rules[] = new restore_log_rule('page_kals', 'view', 'view.php?id={course_module}', '{page_kals}');
 
         return $rules;
     }
@@ -102,7 +102,7 @@ class restore_page_activity_task extends restore_activity_task {
     static public function define_restore_log_rules_for_course() {
         $rules = array();
 
-        $rules[] = new restore_log_rule('page', 'view all', 'index.php?id={course}', null);
+        $rules[] = new restore_log_rule('page_kals', 'view all', 'index.php?id={course}', null);
 
         return $rules;
     }

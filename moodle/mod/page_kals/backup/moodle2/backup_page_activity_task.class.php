@@ -26,7 +26,7 @@
 
 defined('MOODLE_INTERNAL') || die;
 
-require_once($CFG->dirroot . '/mod/page_kals/backup/moodle2/backup_page_stepslib.php');
+require_once($CFG->dirroot . '/mod/page_kals/backup/moodle2/backup_page_kals_stepslib.php');
 
 /**
  * Provides the steps to perform one complete backup of the Page instance
@@ -58,11 +58,11 @@ class backup_page_kals_activity_task extends backup_activity_task {
         $base = preg_quote($CFG->wwwroot,"/");
 
         // Link to the list of pages
-        $search="/(".$base."\/mod\/page\/index.php\?id\=)([0-9]+)/";
+        $search="/(".$base."\/mod\/page_kals\/index.php\?id\=)([0-9]+)/";
         $content= preg_replace($search, '$@PAGEINDEX*$2@$', $content);
 
         // Link to page view by moduleid
-        $search="/(".$base."\/mod\/page\/view.php\?id\=)([0-9]+)/";
+        $search="/(".$base."\/mod\/page_kals\/view.php\?id\=)([0-9]+)/";
         $content= preg_replace($search, '$@PAGEVIEWBYID*$2@$', $content);
 
         return $content;
