@@ -37,6 +37,7 @@ class mod_page_mod_form extends moodleform_mod {
         $mform = $this->_form;
 
         $config = get_config('page');
+        
 
         //-------------------------------------------------------
         $mform->addElement('header', 'general', get_string('general', 'form'));
@@ -56,6 +57,9 @@ class mod_page_mod_form extends moodleform_mod {
 
         //-------------------------------------------------------
         $mform->addElement('header', 'optionssection', get_string('optionsheader', 'page'));
+        
+        //echo "121212". $config->displayoptions;
+        //print_r($config->displayoptions);
 
         if ($this->current->instance) {
             $options = resourcelib_get_displayoptions(explode(',', $config->displayoptions), $this->current->display);
@@ -109,11 +113,20 @@ class mod_page_mod_form extends moodleform_mod {
         
         //-------------------------------------------------------
         $mform->addElement('header', 'kalssection', get_string('kals_header', 'page'));
-        
+        print_r( array(
+            "options" => $options->printintro_adv,
+            "config" => $config->printintro_adv,
+            
+        )) ;
+        print_r( array(
+            "options" => $options->kals_enable,
+            "config" => $config->kals_enable,
+            
+        )) ; 
         // 使用標註
         $mform->addElement('advcheckbox', 'kals_enable', get_string('kals_enable', 'page'));
-        $mform->setDefault('kals_enable', $config->kals_enable);
-        $mform->setAdvanced('kals_enable', $config->kals_enable_adv);
+        $mform->setDefault('kals_enable', $options->kals_enable);
+        $mform->setAdvanced('kals_enable', $options->kals_enable_adv);
         
         // 系統網址
         $mform->addElement('text', 'kals_url', get_string('kals_url', 'page'));
@@ -156,6 +169,10 @@ class mod_page_mod_form extends moodleform_mod {
             if (!empty($displayoptions['popupheight'])) {
                 $default_values['popupheight'] = $displayoptions['popupheight'];
             }
+            if (!empty($displayoptions['kals_enable'])) {
+                $default_values['kals_enable'] = $displayoptions['kals_enable'];
+            }
+            //echo "data_preprocessing: " . $default_values;
         }
     }
 }

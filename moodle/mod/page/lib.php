@@ -150,6 +150,7 @@ function page_update_instance($data, $mform) {
     }
     $displayoptions['printheading'] = $data->printheading;
     $displayoptions['printintro']   = $data->printintro;
+    $displayoptions['kals_enable']   = $data->kals_enable;
     $data->displayoptions = serialize($displayoptions);
 
     $data->content       = $data->page['text'];
@@ -273,7 +274,7 @@ function page_get_coursemodule_info($coursemodule) {
     $height = empty($options['popupheight']) ? 450 : $options['popupheight'];
     $wh = "width=$width,height=$height,toolbar=no,location=no,menubar=no,copyhistory=no,status=no,directories=no,scrollbars=yes,resizable=yes";
     $info->onclick = "window.open('$fullurl', '', '$wh'); return false;";
-
+//echo "bbbbb";
     return $info;
 }
 
@@ -517,6 +518,8 @@ function page_dndupload_handle($uploadinfo) {
     $data->popupwidth = $config->popupwidth;
     $data->printheading = $config->printheading;
     $data->printintro = $config->printintro;
+    //echo $data->printintro;
+    //echo "aaaaaa";
     $data->kals_enable = $config->kals_enable;
     $data->kals_url = $config->kals_url;
 
