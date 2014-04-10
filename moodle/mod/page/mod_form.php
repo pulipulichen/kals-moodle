@@ -94,6 +94,7 @@ class mod_page_mod_form extends moodleform_mod {
         $mform->addElement('advcheckbox', 'printheading', get_string('printheading', 'page'));
         $mform->setDefault('printheading', $config->printheading);
         $mform->setAdvanced('printintro', $config->printheading_adv);
+        
         $mform->addElement('advcheckbox', 'printintro', get_string('printintro', 'page'));
         $mform->setDefault('printintro', $config->printintro);
         $mform->setAdvanced('printintro', $config->printintro_adv);
@@ -105,7 +106,23 @@ class mod_page_mod_form extends moodleform_mod {
             $mform->addElement('select', 'legacyfiles', get_string('legacyfiles', 'page'), $options);
             $mform->setAdvanced('legacyfiles', 1);
         }
+        
+        //-------------------------------------------------------
+        $mform->addElement('header', 'kalssection', get_string('kals_header', 'page'));
+        
+        // 使用標註
+        $mform->addElement('advcheckbox', 'kals_enable', get_string('kals_enable', 'page'));
+        $mform->setDefault('kals_enable', $config->kals_enable);
+        $mform->setAdvanced('kals_enable', $config->kals_enable_adv);
+        
+        // 系統網址
+        $mform->addElement('text', 'kals_url', get_string('kals_url', 'page'));
+        $mform->setDefault('kals_url', $config->kals_url);
+        $mform->setAdvanced('kals_url', $config->kals_url_adv);
+        
+        // 標註類型
 
+        
         //-------------------------------------------------------
         $this->standard_coursemodule_elements();
 

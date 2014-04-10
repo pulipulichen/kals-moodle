@@ -57,4 +57,12 @@ if ($ADMIN->fulltree) {
     $settings->add(new admin_setting_configtext_with_advanced('page/popupheight',
         get_string('popupheight', 'page'), get_string('popupheightexplain', 'page'),
         array('value'=>450, 'adv'=>true), PARAM_INT, 7));
+    
+    // KALS Setting
+    $settings->add(new admin_setting_configcheckbox_with_advanced('page/kals_enable',
+        get_string('kals_enable', 'page'), get_string('kals_enableexplain', 'page'),
+        array('value'=>0, 'adv'=>false)));
+    $settings->add(new admin_setting_configcheckbox_with_advanced('page/kals_url',
+        get_string('kals_url', 'page'), get_string('kals_urlexplain', 'page'),
+        array('value'=>0, 'adv'=>false)));
 }

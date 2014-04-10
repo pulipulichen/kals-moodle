@@ -61,3 +61,7 @@ $string['printheading'] = 'Display page name';
 $string['printheadingexplain'] = 'Display page name above content?';
 $string['printintro'] = 'Display page description';
 $string['printintroexplain'] = 'Display page description above content?';
+
+$string['kals_header'] = "KALS雲端高互動雲端標註系統設定";
+$string['kals_enable'] = "啟用標註功能";
+$string['kals_url'] = "系統網址";
