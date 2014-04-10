@@ -34,7 +34,7 @@ class restore_page_activity_structure_step extends restore_activity_structure_st
     protected function define_structure() {
 
         $paths = array();
-        $paths[] = new restore_path_element('page', '/activity/page');
+        $paths[] = new restore_path_element('page_kals', '/activity/page_kals');
 
         // Return the paths wrapped into standard activity structure
         return $this->prepare_activity_structure($paths);
@@ -55,7 +55,7 @@ class restore_page_activity_structure_step extends restore_activity_structure_st
 
     protected function after_execute() {
         // Add page related files, no need to match by itemname (just internally handled context)
-        $this->add_related_files('mod_page', 'intro', null);
-        $this->add_related_files('mod_page', 'content', null);
+        $this->add_related_files('mod_page_kals', 'intro', null);
+        $this->add_related_files('mod_page_kals', 'content', null);
     }
 }

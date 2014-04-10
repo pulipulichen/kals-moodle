@@ -33,9 +33,9 @@ if ($ADMIN->fulltree) {
     $defaultdisplayoptions = array(RESOURCELIB_DISPLAY_OPEN);
 
     //--- general settings -----------------------------------------------------------------------------------
-    $settings->add(new admin_setting_configcheckbox('page/requiremodintro',
+    $settings->add(new admin_setting_configcheckbox('page_kals/requiremodintro',
         get_string('requiremodintro', 'admin'), get_string('configrequiremodintro', 'admin'), 1));
-    $settings->add(new admin_setting_configmultiselect('page/displayoptions',
+    $settings->add(new admin_setting_configmultiselect('page_kals/displayoptions',
         get_string('displayoptions', 'page'), get_string('configdisplayoptions', 'page'),
         $defaultdisplayoptions, $displayoptions));
 

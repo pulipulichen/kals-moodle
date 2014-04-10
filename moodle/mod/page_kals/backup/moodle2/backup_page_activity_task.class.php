@@ -18,7 +18,7 @@
 /**
  * Defines backup_page_activity_task class
  *
- * @package     mod_page
+ * @package     mod_page_kals
  * @category    backup
  * @copyright   2010 onwards Eloy Lafuente (stronk7) {@link http://stronk7.com}
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -31,7 +31,7 @@ require_once($CFG->dirroot . '/mod/page_kals/backup/moodle2/backup_page_stepslib
 /**
  * Provides the steps to perform one complete backup of the Page instance
  */
-class backup_page_activity_task extends backup_activity_task {
+class backup_page_kals_activity_task extends backup_activity_task {
 
     /**
      * No specific settings for this activity

@@ -35,8 +35,8 @@ $PAGE->set_pagelayout('incourse');
 
 add_to_log($course->id, 'page', 'view all', "index.php?id=$course->id", '');
 
-$strpage         = get_string('modulename', 'page');
-$strpages        = get_string('modulenameplural', 'page');
+$strpage         = get_string('modulename', 'page_kals');
+$strpages        = get_string('modulenameplural', 'page_kals');
 $strsectionname  = get_string('sectionname', 'format_'.$course->format);
 $strname         = get_string('name');
 $strintro        = get_string('moduleintro');
@@ -90,7 +90,7 @@ foreach ($pages as $page) {
     $table->data[] = array (
         $printsection,
         "<a $class href=\"view.php?id=$cm->id\">".format_string($page->name)."</a>",
-        format_module_intro('page', $page, $cm->id));
+        format_module_intro('page_kals', $page, $cm->id));
 }
 
 echo html_writer::table($table);

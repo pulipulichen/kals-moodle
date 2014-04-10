@@ -17,7 +17,7 @@
 /**
  * PHPUnit data generator tests
  *
- * @package    mod_page
+ * @package    mod_page_kals
  * @category   phpunit
  * @copyright  2012 Petr Skoda {@link http://skodak.org}
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -29,12 +29,12 @@ defined('MOODLE_INTERNAL') || die();
 /**
  * PHPUnit data generator testcase
  *
- * @package    mod_page
+ * @package    mod_page_kals
  * @category   phpunit
  * @copyright  2012 Petr Skoda {@link http://skodak.org}
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class mod_page_generator_testcase extends advanced_testcase {
+class mod_page_kals_generator_testcase extends advanced_testcase {
     public function test_generator() {
         global $DB, $SITE;
 
@@ -42,9 +42,9 @@ class mod_page_generator_testcase extends advanced_testcase {
 
         $this->assertEquals(0, $DB->count_records('page'));
 
-        /** @var mod_page_generator $generator */
+        /** @var mod_page_kals_generator $generator */
         $generator = $this->getDataGenerator()->get_plugin_generator('mod_page');
-        $this->assertInstanceOf('mod_page_generator', $generator);
+        $this->assertInstanceOf('mod_page_kals_generator', $generator);
         $this->assertEquals('page', $generator->get_modulename());
 
         $generator->create_instance(array('course'=>$SITE->id));

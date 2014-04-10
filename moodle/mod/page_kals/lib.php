@@ -82,7 +82,7 @@ function page_get_post_actions() {
 /**
  * Add page instance.
  * @param stdClass $data
- * @param mod_page_mod_form $mform
+ * @param mod_page_kals_mod_form $mform
  * @return int new page instance id
  */
 function page_add_instance($data, $mform = null) {
@@ -114,7 +114,7 @@ function page_add_instance($data, $mform = null) {
 
     if ($mform and !empty($data->page['itemid'])) {
         $draftitemid = $data->page['itemid'];
-        $data->content = file_save_draft_area_files($draftitemid, $context->id, 'mod_page', 'content', 0, page_get_editor_options($context), $data->content);
+        $data->content = file_save_draft_area_files($draftitemid, $context->id, 'mod_page_kals', 'content', 0, page_get_editor_options($context), $data->content);
         $DB->update_record('page', $data);
     }
 
@@ -154,7 +154,7 @@ function page_update_instance($data, $mform) {
 
     $context = context_module::instance($cmid);
     if ($draftitemid) {
-        $data->content = file_save_draft_area_files($draftitemid, $context->id, 'mod_page', 'content', 0, page_get_editor_options($context), $data->content);
+        $data->content = file_save_draft_area_files($draftitemid, $context->id, 'mod_page_kals', 'content', 0, page_get_editor_options($context), $data->content);
         $DB->update_record('page', $data);
     }
 
@@ -276,7 +276,7 @@ function page_get_coursemodule_info($coursemodule) {
 /**
  * Lists all browsable file areas
  *
- * @package  mod_page
+ * @package  mod_page_kals
  * @category files
  * @param stdClass $course course object
  * @param stdClass $cm course module object
@@ -292,7 +292,7 @@ function page_get_file_areas($course, $cm, $context) {
 /**
  * File browsing support for page module content area.
  *
- * @package  mod_page
+ * @package  mod_page_kals
  * @category files
  * @param stdClass $browser file browser instance
  * @param stdClass $areas file areas
@@ -320,9 +320,9 @@ function page_get_file_info($browser, $areas, $course, $cm, $context, $filearea,
         $filename = is_null($filename) ? '.' : $filename;
 
         $urlbase = $CFG->wwwroot.'/pluginfile.php';
-        if (!$storedfile = $fs->get_file($context->id, 'mod_page', 'content', 0, $filepath, $filename)) {
+        if (!$storedfile = $fs->get_file($context->id, 'mod_page_kals', 'content', 0, $filepath, $filename)) {
             if ($filepath === '/' and $filename === '.') {
-                $storedfile = new virtual_root_file($context->id, 'mod_page', 'content', 0);
+                $storedfile = new virtual_root_file($context->id, 'mod_page_kals', 'content', 0);
             } else {
                 // not found
                 return null;
@@ -340,7 +340,7 @@ function page_get_file_info($browser, $areas, $course, $cm, $context, $filearea,
 /**
  * Serves the page files.
  *
- * @package  mod_page
+ * @package  mod_page_kals
  * @category files
  * @param stdClass $course course object
  * @param stdClass $cm course module object
@@ -392,13 +392,13 @@ function page_pluginfile($course, $cm, $context, $filearea, $args, $forcedownloa
     } else {
         $fs = get_file_storage();
         $relativepath = implode('/', $args);
-        $fullpath = "/$context->id/mod_page/$filearea/0/$relativepath";
+        $fullpath = "/$context->id/mod_page_kals/$filearea/0/$relativepath";
         if (!$file = $fs->get_file_by_hash(sha1($fullpath)) or $file->is_directory()) {
-            $page = $DB->get_record('page', array('id'=>$cm->instance), 'id, legacyfiles', MUST_EXIST);
+            $page = $DB->get_record('page_kals', array('id'=>$cm->instance), 'id, legacyfiles', MUST_EXIST);
             if ($page->legacyfiles != RESOURCELIB_LEGACYFILES_ACTIVE) {
                 return false;
             }
-            if (!$file = resourcelib_try_file_migration('/'.$relativepath, $cm->id, $cm->course, 'mod_page', 'content', 0)) {
+            if (!$file = resourcelib_try_file_migration('/'.$relativepath, $cm->id, $cm->course, 'mod_page_kals', 'content', 0)) {
                 return false;
             }
             //file migrate - update flag
@@ -436,14 +436,14 @@ function page_export_contents($cm, $baseurl) {
 
     // page contents
     $fs = get_file_storage();
-    $files = $fs->get_area_files($context->id, 'mod_page', 'content', 0, 'sortorder DESC, id ASC', false);
+    $files = $fs->get_area_files($context->id, 'mod_page_kals', 'content', 0, 'sortorder DESC, id ASC', false);
     foreach ($files as $fileinfo) {
         $file = array();
         $file['type']         = 'file';
         $file['filename']     = $fileinfo->get_filename();
         $file['filepath']     = $fileinfo->get_filepath();
         $file['filesize']     = $fileinfo->get_filesize();
-        $file['fileurl']      = file_encode_url("$CFG->wwwroot/" . $baseurl, '/'.$context->id.'/mod_page/content/'.$page->revision.$fileinfo->get_filepath().$fileinfo->get_filename(), true);
+        $file['fileurl']      = file_encode_url("$CFG->wwwroot/" . $baseurl, '/'.$context->id.'/mod_page_kals/content/'.$page->revision.$fileinfo->get_filepath().$fileinfo->get_filename(), true);
         $file['timecreated']  = $fileinfo->get_timecreated();
         $file['timemodified'] = $fileinfo->get_timemodified();
         $file['sortorder']    = $fileinfo->get_sortorder();
@@ -460,7 +460,7 @@ function page_export_contents($cm, $baseurl) {
     $pagefile['filename']     = $filename;
     $pagefile['filepath']     = '/';
     $pagefile['filesize']     = 0;
-    $pagefile['fileurl']      = file_encode_url("$CFG->wwwroot/" . $baseurl, '/'.$context->id.'/mod_page/content/' . $filename, true);
+    $pagefile['fileurl']      = file_encode_url("$CFG->wwwroot/" . $baseurl, '/'.$context->id.'/mod_page_kals/content/' . $filename, true);
     $pagefile['timecreated']  = null;
     $pagefile['timemodified'] = $page->timemodified;
     // make this file as main file

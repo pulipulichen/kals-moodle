@@ -29,7 +29,7 @@ defined('MOODLE_INTERNAL') || die();
 /**
  * Page conversion handler. This resource handler is called by moodle1_mod_resource_handler
  */
-class moodle1_mod_page_handler extends moodle1_resource_successor_handler {
+class moodle1_mod_page_kals_handler extends moodle1_resource_successor_handler {
 
     /** @var moodle1_file_manager instance */
     protected $fileman = null;
@@ -90,7 +90,7 @@ class moodle1_mod_page_handler extends moodle1_resource_successor_handler {
         $page['displayoptions'] = serialize($options);
 
         // get a fresh new file manager for this instance
-        $this->fileman = $this->converter->get_file_manager($contextid, 'mod_page');
+        $this->fileman = $this->converter->get_file_manager($contextid, 'mod_page_kals');
 
         // convert course files embedded into the intro
         $this->fileman->filearea = 'intro';
@@ -105,7 +105,7 @@ class moodle1_mod_page_handler extends moodle1_resource_successor_handler {
         // write page.xml
         $this->open_xml_writer("activities/page_{$moduleid}/page.xml");
         $this->xmlwriter->begin_tag('activity', array('id' => $instanceid, 'moduleid' => $moduleid,
-            'modulename' => 'page', 'contextid' => $contextid));
+            'modulename' => 'page_kals', 'contextid' => $contextid));
         $this->write_xml('page', $page, array('/page/id'));
         $this->xmlwriter->end_tag('activity');
         $this->close_xml_writer();

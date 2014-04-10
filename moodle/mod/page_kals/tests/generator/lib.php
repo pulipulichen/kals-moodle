@@ -15,9 +15,9 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * mod_page data generator
+ * mod_page_kals data generator
  *
- * @package    mod_page
+ * @package    mod_page_kals
  * @category   phpunit
  * @copyright  2012 Petr Skoda {@link http://skodak.org}
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -29,12 +29,12 @@ defined('MOODLE_INTERNAL') || die();
 /**
  * Page module PHPUnit data generator class
  *
- * @package    mod_page
+ * @package    mod_page_kals
  * @category   phpunit
  * @copyright  2012 Petr Skoda {@link http://skodak.org}
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class mod_page_generator extends phpunit_module_generator {
+class mod_page_kals_generator extends phpunit_module_generator {
 
     /**
      * Create new page module instance
