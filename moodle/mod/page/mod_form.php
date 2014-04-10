@@ -60,6 +60,7 @@ class mod_page_mod_form extends moodleform_mod {
         
         //echo "121212". $config->displayoptions;
         //print_r($config->displayoptions);
+        //print_r($this->current->display);
 
         if ($this->current->instance) {
             $options = resourcelib_get_displayoptions(explode(',', $config->displayoptions), $this->current->display);
@@ -95,6 +96,7 @@ class mod_page_mod_form extends moodleform_mod {
             $mform->setAdvanced('popupheight', $config->popupheight_adv);
         }
 
+        //echo $config->printheading.']]]';
         $mform->addElement('advcheckbox', 'printheading', get_string('printheading', 'page'));
         $mform->setDefault('printheading', $config->printheading);
         $mform->setAdvanced('printintro', $config->printheading_adv);
@@ -113,6 +115,7 @@ class mod_page_mod_form extends moodleform_mod {
         
         //-------------------------------------------------------
         $mform->addElement('header', 'kalssection', get_string('kals_header', 'page'));
+        /*
         print_r( array(
             "options" => $options->printintro_adv,
             "config" => $config->printintro_adv,
@@ -122,22 +125,34 @@ class mod_page_mod_form extends moodleform_mod {
             "options" => $options->kals_enable,
             "config" => $config->kals_enable,
             
-        )) ; 
+        )) ;
+        */
+        
+        //$page = $DB->get_record('page', array('id'=>$this->current->instance), '*', MUST_EXIST);
+        //$options = empty($page->displayoptions) ? array() : unserialize($page->displayoptions);
+        
+        
         // 使用標註
         $mform->addElement('advcheckbox', 'kals_enable', get_string('kals_enable', 'page'));
         $mform->setDefault('kals_enable', $options->kals_enable);
+        //echo "[".$options->kals_enable."]";
         $mform->setAdvanced('kals_enable', $options->kals_enable_adv);
         
         // 系統網址
         $mform->addElement('text', 'kals_url', get_string('kals_url', 'page'));
-        $mform->setDefault('kals_url', $config->kals_url);
-        $mform->setAdvanced('kals_url', $config->kals_url_adv);
+        $mform->setDefault('kals_url', $options->kals_url);
+        $mform->setAdvanced('kals_url', $options->kals_url_adv);
         
         // 標註類型
 
         
+        //$features = new object();
+        //$features->kals_enable           = false;
+        //$features->kals_url        = 'AAAAAAAAAAA';
+        
         //-------------------------------------------------------
         $this->standard_coursemodule_elements();
+        //$this->standard_coursemodule_elements($features);
 
         //-------------------------------------------------------
         $this->add_action_buttons();

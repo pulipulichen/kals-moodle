@@ -41,7 +41,7 @@ function page_supports($feature) {
         case FEATURE_GRADE_OUTCOMES:          return false;
         case FEATURE_BACKUP_MOODLE2:          return true;
         case FEATURE_SHOW_DESCRIPTION:        return true;
-        case FEATURE_KALS_ENABLE:             return true;
+        case FEATURE_KALS_ENABLE:             return false;
 
         default: return null;
     }
@@ -151,6 +151,7 @@ function page_update_instance($data, $mform) {
     $displayoptions['printheading'] = $data->printheading;
     $displayoptions['printintro']   = $data->printintro;
     $displayoptions['kals_enable']   = $data->kals_enable;
+    $displayoptions['kals_url']   = $data->kals_url;
     $data->displayoptions = serialize($displayoptions);
 
     $data->content       = $data->page['text'];
@@ -250,6 +251,8 @@ function page_user_complete($course, $user, $mod, $page) {
 function page_get_coursemodule_info($coursemodule) {
     global $CFG, $DB;
     require_once("$CFG->libdir/resourcelib.php");
+    
+    //echo 'page_get_coursemodule_info($coursemodule)';
 
     if (!$page = $DB->get_record('page', array('id'=>$coursemodule->instance),
             'id, name, display, displayoptions, intro, introformat')) {
@@ -258,6 +261,8 @@ function page_get_coursemodule_info($coursemodule) {
 
     $info = new cached_cm_info();
     $info->name = $page->name;
+    
+    //echo $info->name."112121212";
 
     if ($coursemodule->showdescription) {
         // Convert intro to html. Do not filter cached version, filters run at display time.
@@ -269,6 +274,7 @@ function page_get_coursemodule_info($coursemodule) {
     }
 
     $fullurl = "$CFG->wwwroot/mod/page/view.php?id=$coursemodule->id&amp;inpopup=1";
+    //print_r($page->displayoptions);
     $options = empty($page->displayoptions) ? array() : unserialize($page->displayoptions);
     $width  = empty($options['popupwidth'])  ? 620 : $options['popupwidth'];
     $height = empty($options['popupheight']) ? 450 : $options['popupheight'];
@@ -292,6 +298,7 @@ function page_get_coursemodule_info($coursemodule) {
 function page_get_file_areas($course, $cm, $context) {
     $areas = array();
     $areas['content'] = get_string('content', 'page');
+    //echo 1212;
     return $areas;
 }
 
