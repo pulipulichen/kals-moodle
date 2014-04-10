@@ -99,6 +99,10 @@ function page_add_instance($data, $mform = null) {
     }
     $displayoptions['printheading'] = $data->printheading;
     $displayoptions['printintro']   = $data->printintro;
+    
+    $displayoptions['kals_enable'] = $data->kals_enable;
+    $displayoptions['kals_url']   = $data->kals_url;
+    
     $data->displayoptions = serialize($displayoptions);
 
     if ($mform) {
@@ -512,6 +516,8 @@ function page_dndupload_handle($uploadinfo) {
     $data->popupwidth = $config->popupwidth;
     $data->printheading = $config->printheading;
     $data->printintro = $config->printintro;
+    $data->kals_enable = $config->kals_enable;
+    $data->kals_url = $config->kals_url;
 
     return page_add_instance($data, null);
 }
