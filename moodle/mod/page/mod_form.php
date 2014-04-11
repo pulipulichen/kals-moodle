@@ -128,20 +128,29 @@ class mod_page_mod_form extends moodleform_mod {
         )) ;
         */
         
-        //$page = $DB->get_record('page', array('id'=>$this->current->instance), '*', MUST_EXIST);
-        //$options = empty($page->displayoptions) ? array() : unserialize($page->displayoptions);
+        //$db_page = $DB->get_record('page', array('id'=>$this->current->instance), '*', MUST_EXIST);
+        //$db_options = empty($db_page->displayoptions) ? array() : unserialize($db_page->displayoptions);
         
         
         // 使用標註
-        $mform->addElement('advcheckbox', 'kals_enable', get_string('kals_enable', 'page'));
-        $mform->setDefault('kals_enable', $options->kals_enable);
+        $mform->addElement('advcheckbox', 'kals_enable', get_string('kals_enable', 'page'), array(
+            checked => false
+        ));
+        $mform->setDefault('kals_enable', $options['kals_enable']);
         //echo "[".$options->kals_enable."]";
-        $mform->setAdvanced('kals_enable', $options->kals_enable_adv);
+        $mform->setAdvanced('kals_enable', $options['kals_enable_adv']);
         
         // 系統網址
-        $mform->addElement('text', 'kals_url', get_string('kals_url', 'page'));
+        //$mform->addElement('text', 'kals_url', get_string('kals_url', 'page'));
+        //echo $db_options['kals_url'] . ']]]]';
         //$mform->setDefault('kals_url', $options->kals_url);
         //$mform->setAdvanced('kals_url', $options->kals_url_adv);
+        //$kals_url = $db_options['kals_url'];
+        //echo '<input name="kals_url" type="text" value="'.$kals_url.'" id="id_kals_url" style="background-image: none; background-position: 0% 0%; background-repeat: repeat repeat;">';
+        $mform->addElement('text', 'kals_url', get_string('kals_url', 'page'));
+        $mform->setDefault('kals_url', $options['kals_url']);
+        $mform->setAdvanced('kals_url', $options['kals_url_adv']);
+        
         
         // 標註類型
 
@@ -170,6 +179,8 @@ class mod_page_mod_form extends moodleform_mod {
             $default_values['page']['text']   = file_prepare_draft_area($draftitemid, $this->context->id, 'mod_page', 'content', 0, page_get_editor_options($this->context), $default_values['content']);
             $default_values['page']['itemid'] = $draftitemid;
         }
+        
+        
         if (!empty($default_values['displayoptions'])) {
             $displayoptions = unserialize($default_values['displayoptions']);
             if (isset($displayoptions['printintro'])) {
@@ -186,6 +197,9 @@ class mod_page_mod_form extends moodleform_mod {
             }
             if (!empty($displayoptions['kals_enable'])) {
                 $default_values['kals_enable'] = $displayoptions['kals_enable'];
+            }
+            if (!empty($displayoptions['kals_url'])) {
+                $default_values['kals_url'] = $displayoptions['kals_url'];
             }
             //echo "data_preprocessing: " . $default_values;
         }

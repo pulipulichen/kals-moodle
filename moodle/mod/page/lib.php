@@ -41,7 +41,8 @@ function page_supports($feature) {
         case FEATURE_GRADE_OUTCOMES:          return false;
         case FEATURE_BACKUP_MOODLE2:          return true;
         case FEATURE_SHOW_DESCRIPTION:        return true;
-        case FEATURE_KALS_ENABLE:             return false;
+        case FEATURE_KALS_ENABLE:             return true;
+        case FEATURE_KALS_URL:                return true;
 
         default: return null;
     }

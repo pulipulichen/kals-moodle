@@ -606,6 +606,7 @@ class HTML_QuickForm extends HTML_Common {
         }
         $elementName = $elementObject->getName();
 
+
         // Add the element if it is not an incompatible duplicate
         if (!empty($elementName) && isset($this->_elementIndex[$elementName])) {
             if ($this->_elements[$this->_elementIndex[$elementName]]->getType() ==
@@ -617,13 +618,16 @@ class HTML_QuickForm extends HTML_Common {
                 $error = self::raiseError(null, QUICKFORM_INVALID_ELEMENT_NAME, null, E_USER_WARNING, "Element '$elementName' already exists in HTML_QuickForm::addElement()", 'HTML_QuickForm_Error', true);
                 return $error;
             }
+            
         } else {
             $this->_elements[] =& $elementObject;
             $elKeys = array_keys($this->_elements);
             $this->_elementIndex[$elementName] = end($elKeys);
+            
         }
         if ($this->_freezeAll) {
             $elementObject->freeze();
+            
         }
 
         return $elementObject;

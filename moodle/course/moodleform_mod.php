@@ -86,8 +86,6 @@ abstract class moodleform_mod extends moodleform {
         $this->_features->rating            = plugin_supports('mod', $this->_modname, FEATURE_RATE, false);
         $this->_features->showdescription   = plugin_supports('mod', $this->_modname, FEATURE_SHOW_DESCRIPTION, false);
         
-        $this->_features->kals_enable   = plugin_supports('mod', $this->_modname, FEATURE_KALS_ENABLE, true);
-
         $this->_features->gradecat          = ($this->_features->outcomes or $this->_features->hasgrades);
         $this->_features->advancedgrading   = plugin_supports('mod', $this->_modname, FEATURE_ADVANCED_GRADING, false);
     }
