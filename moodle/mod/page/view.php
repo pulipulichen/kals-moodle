@@ -102,7 +102,7 @@ echo $OUTPUT->box($content, "generalbox center clearfix");
 $strlastmodified = get_string("lastmodified");
 echo "<div class=\"modified\">$strlastmodified: ".userdate($page->timemodified)."</div>";
 
-print_r($options);
+//print_r($options);
 
 $kals_enable = $options['kals_enable'];
 $kals_url = $options['kals_url'];
@@ -115,7 +115,7 @@ if ($kals_enable == '1') {
 //if (true) {
     //echo $kals_logo;
     //$user_id = $USER->id;
-    //$user_email =  $USER->email;
+    $user_email =  $USER->email;
     echo '<script src="'.$kals_url.'" type="text/javascript"></script>
     <script type="text/javascript">// <![CDATA[
     KALS_CONFIG = {
