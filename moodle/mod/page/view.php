@@ -102,24 +102,32 @@ echo $OUTPUT->box($content, "generalbox center clearfix");
 $strlastmodified = get_string("lastmodified");
 echo "<div class=\"modified\">$strlastmodified: ".userdate($page->timemodified)."</div>";
 
+print_r($options);
+
+$kals_enable = $options['kals_enable'];
+$kals_url = $options['kals_url'];
+$kals_logo = $options['kals_logo'];
+
 /**
  * KALS的部份
  */
-echo '<script src="http://pc-pudding-2013.dlll.nccu.edu.tw/kals/web_apps/generic/loader" type="text/javascript"></script>
-<script type="text/javascript">// <![CDATA[
-KALS_CONFIG = {
-    /**
-     * 標註範圍指定區塊
-     * @type {string,null} jQuery的指定語法(selector)
-     *     請盡量以ID為指定區塊。
-     *     例如指定ID名為「annotation_scope」的區塊，請輸入「#annotation_scope」
-     *     如果是指定區有多個區塊，那麼只有第一個區塊能夠進行標註。
-     *     預設是選擇全部的網頁。
-     */
-    logo: "雲端高互動合作式閱讀平台",
-    login_hint: \'You can use demo account: 電子信箱位址：<strong>demo@dlll.nccu.edu.tw</strong> / 密碼：<strong>demo</strong>\',
-    annotation_scope_selector: ".region-content"
-};
-// ]]></script>';
+if ($kals_enable == '1') {
+//if (true) {
+    //echo $kals_logo;
+    //$user_id = $USER->id;
+    //$user_email =  $USER->email;
+    echo '<script src="'.$kals_url.'" type="text/javascript"></script>
+    <script type="text/javascript">// <![CDATA[
+    KALS_CONFIG = {
+        annotation_scope_selector: ".region-content",
+        user_email: "'.$user_email.'",
+
+        // 以下根據系統設定來調整
+        logo: "'.$kals_logo.'"
+    };
+    // ]]></script>';
+    
+}   //if ($kals_enable == 1) {
+
 
 echo $OUTPUT->footer();

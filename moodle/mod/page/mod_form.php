@@ -133,9 +133,8 @@ class mod_page_mod_form extends moodleform_mod {
         
         
         // 使用標註
-        $mform->addElement('advcheckbox', 'kals_enable', get_string('kals_enable', 'page'), array(
-            checked => false
-        ));
+        //$mform->addElement('advcheckbox', 'kals_enable', get_string('kals_enable', 'page'));
+        $mform->addElement('text', 'kals_enable', get_string('kals_enable', 'page'));
         $mform->setDefault('kals_enable', $options['kals_enable']);
         //echo "[".$options->kals_enable."]";
         $mform->setAdvanced('kals_enable', $options['kals_enable_adv']);
@@ -150,6 +149,10 @@ class mod_page_mod_form extends moodleform_mod {
         $mform->addElement('text', 'kals_url', get_string('kals_url', 'page'));
         $mform->setDefault('kals_url', $options['kals_url']);
         $mform->setAdvanced('kals_url', $options['kals_url_adv']);
+        
+        $mform->addElement('text', 'kals_logo', get_string('kals_logo', 'page'));
+        $mform->setDefault('kals_logo', $options['kals_logo']);
+        $mform->setAdvanced('kals_logo', $options['kals_logo_adv']);
         
         
         // 標註類型

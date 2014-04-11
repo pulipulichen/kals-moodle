@@ -43,6 +43,7 @@ function page_supports($feature) {
         case FEATURE_SHOW_DESCRIPTION:        return true;
         case FEATURE_KALS_ENABLE:             return true;
         case FEATURE_KALS_URL:                return true;
+        case FEATURE_KALS_LOGO:                return true;
 
         default: return null;
     }
@@ -153,6 +154,7 @@ function page_update_instance($data, $mform) {
     $displayoptions['printintro']   = $data->printintro;
     $displayoptions['kals_enable']   = $data->kals_enable;
     $displayoptions['kals_url']   = $data->kals_url;
+    $displayoptions['kals_logo']   = $data->kals_logo;
     $data->displayoptions = serialize($displayoptions);
 
     $data->content       = $data->page['text'];
