@@ -140,8 +140,8 @@ class mod_page_mod_form extends moodleform_mod {
         
         // 系統網址
         $mform->addElement('text', 'kals_url', get_string('kals_url', 'page'));
-        $mform->setDefault('kals_url', $options->kals_url);
-        $mform->setAdvanced('kals_url', $options->kals_url_adv);
+        //$mform->setDefault('kals_url', $options->kals_url);
+        //$mform->setAdvanced('kals_url', $options->kals_url_adv);
         
         // 標註類型
 
