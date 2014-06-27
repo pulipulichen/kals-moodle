@@ -71,6 +71,9 @@ if ($ADMIN->fulltree) {
     $settings->add(new admin_setting_configcheckbox_with_advanced('resource/showtype',
             get_string('showtype', 'resource'), get_string('showtype_desc', 'resource'),
             array('value'=>0, 'adv'=>false)));
+    $settings->add(new admin_setting_configcheckbox_with_advanced('resource/revisionenable',
+            get_string('showtype', 'resource'), get_string('showtype_desc', 'resource'),
+            array('value'=>0, 'adv'=>false)));
     $settings->add(new admin_setting_configtext_with_advanced('resource/popupwidth',
         get_string('popupwidth', 'resource'), get_string('popupwidthexplain', 'resource'),
         array('value'=>620, 'adv'=>true), PARAM_INT, 7));

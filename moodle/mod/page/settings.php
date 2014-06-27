@@ -59,11 +59,11 @@ if ($ADMIN->fulltree) {
         array('value'=>450, 'adv'=>true), PARAM_INT, 7));
     
     // KALS Setting
-    echo "settings";
-    $settings->add(new admin_setting_configcheckbox_with_advanced('page/kals_enable',
+    //echo "settings";
+    $settings->add(new admin_setting_configtext_with_advanced('page/kals_enable',
         get_string('kals_enable', 'page'), get_string('kals_enableexplain', 'page'),
-        array('value'=>0, 'adv'=>false)));
-    //$settings->add(new admin_setting_configcheckbox_with_advanced('page/kals_url',
-    //    get_string('kals_url', 'page'), get_string('kals_urlexplain', 'page'),
-    //    array('value'=>0, 'adv'=>false)));
+        array('value'=>"aaaa", 'adv'=>false)));
+    $settings->add(new admin_setting_configtext_with_advanced('page/kals_url',
+        get_string('kals_url', 'page'), get_string('kals_urlexplain', 'page'),
+        array('value'=>"12121", 'adv'=>false)));
 }

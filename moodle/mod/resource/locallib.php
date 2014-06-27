@@ -104,6 +104,8 @@ function resource_display_embed($resource, $cm, $course, $file) {
     echo $code;
 
     resource_print_intro($resource, $cm, $course);
+    echo '<a href="'.$fullurl.'" target="_blank">Open in new window.</a>';
+    echo "\n\n<!-- content hash: [" . $file->get_contenthash(). "] -->";
 
     echo $OUTPUT->footer();
     die;

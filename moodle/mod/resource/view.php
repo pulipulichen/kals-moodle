@@ -47,6 +47,11 @@ if ($r) {
     $resource = $DB->get_record('resource', array('id'=>$cm->instance), '*', MUST_EXIST);
 }
 
+//$revisionenable = $options['revisionenable'];
+//if ($revisionenable === '0') {
+    $resource->revision = 0;
+//}
+
 $course = $DB->get_record('course', array('id'=>$cm->course), '*', MUST_EXIST);
 
 require_course_login($course, true, $cm);
@@ -106,4 +111,3 @@ switch ($displaytype) {
         resource_print_workaround($resource, $cm, $course, $file);
         break;
 }
-

@@ -135,7 +135,7 @@ class mod_page_mod_form extends moodleform_mod {
         // 使用標註
         //$mform->addElement('advcheckbox', 'kals_enable', get_string('kals_enable', 'page'));
         $mform->addElement('text', 'kals_enable', get_string('kals_enable', 'page'));
-        $mform->setDefault('kals_enable', $options['kals_enable']);
+        $mform->setDefault('kals_enable', '1');
         //echo "[".$options->kals_enable."]";
         $mform->setAdvanced('kals_enable', $options['kals_enable_adv']);
         
@@ -147,11 +147,11 @@ class mod_page_mod_form extends moodleform_mod {
         //$kals_url = $db_options['kals_url'];
         //echo '<input name="kals_url" type="text" value="'.$kals_url.'" id="id_kals_url" style="background-image: none; background-position: 0% 0%; background-repeat: repeat repeat;">';
         $mform->addElement('text', 'kals_url', get_string('kals_url', 'page'));
-        $mform->setDefault('kals_url', $options['kals_url']);
-        $mform->setAdvanced('kals_url', $options['kals_url_adv']);
+        $mform->setDefault('kals_url', "/kals/web_apps/generic/loader/release");
+        $mform->setAdvanced('kals_url', $options->kals_url_adv);
         
         $mform->addElement('text', 'kals_logo', get_string('kals_logo', 'page'));
-        $mform->setDefault('kals_logo', $options['kals_logo']);
+        $mform->setDefault('kals_logo', 'KALS');
         $mform->setAdvanced('kals_logo', $options['kals_logo_adv']);
         
         

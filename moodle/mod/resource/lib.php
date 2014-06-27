@@ -145,6 +145,9 @@ function resource_set_display_options($data) {
     if (!empty($data->showtype)) {
         $displayoptions['showtype'] = 1;
     }
+    if (!empty($data->revisionenable)) {
+        $displayoptions['revisionenable'] = 1;
+    }
     $data->displayoptions = serialize($displayoptions);
 }
 
@@ -514,6 +517,7 @@ function resource_dndupload_handle($uploadinfo) {
     $data->printintro = $config->printintro;
     $data->showsize = (isset($config->showsize)) ? $config->showsize : 0;
     $data->showtype = (isset($config->showtype)) ? $config->showtype : 0;
+    $data->revisionenable = (isset($config->revisionenable)) ? $config->revisionenable : 0;
     $data->filterfiles = $config->filterfiles;
 
     return resource_add_instance($data, null);
