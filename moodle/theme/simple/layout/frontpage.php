@@ -28,6 +28,15 @@ echo $OUTPUT->doctype() ?>
     <meta name="description" content="<?php p(strip_tags(format_text($SITE->summary, FORMAT_HTML))) ?>" />
     <?php echo $OUTPUT->standard_head_html() ?>
     
+    
+    <?php 
+    /**
+     * 加上Sementic UI
+     * @author Pulipuli Chen <pulipuli.chen@gmail.com> 20151016
+     */
+    ?>
+    <link rel="stylesheet" type="text/css" href="<?php echo $CFG->wwwroot; ?>/theme/simple/semantic-ui/semantic.min.css">
+    <script src="<?php echo $CFG->wwwroot; ?>/theme/simple/semantic-ui/semantic.min.js"></script>
 </head>
 <body id="<?php p($PAGE->bodyid) ?>" class="<?php p($PAGE->bodyclasses.' '.join(' ', $bodyclasses)) ?>">
     

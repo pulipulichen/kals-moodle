@@ -27,11 +27,21 @@
         header('Location: install.php');
         die;
     }
+    
 
     require_once('config.php');
     require_once($CFG->dirroot .'/course/lib.php');
     require_once($CFG->libdir .'/filelib.php');
 
+    /**
+     * 強迫登入
+     * @author Pulipuli Chen <pulipuli.chen@gmail.com> 20151016
+     */
+    if (!isloggedin()) {
+        header('Location: login/');
+        die;
+    }
+    
     redirect_if_major_upgrade_required();
 
     $urlparams = array();
