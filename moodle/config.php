@@ -22,7 +22,12 @@ if (isset($_SERVER['HTTPS'])) { $protocol='https://'; }
 if (isset($_SERVER['HTTP_HOST'])) { $hostname=$_SERVER['HTTP_HOST']; }
 $CFG->wwwroot = $protocol.$hostname;
 
-$CFG->dataroot  = '/var/www/moodledata';
+if (DIRECTORY_SEPARATOR === "\\") {
+    $CFG->dataroot  = 'D:\\xampp\\htdocs\\kals-moodle\\moodledata';
+}
+else {
+    $CFG->dataroot  = '/var/www/moodledata';
+}
 $CFG->admin     = 'admin';
 
 $CFG->directorypermissions = 0750;
