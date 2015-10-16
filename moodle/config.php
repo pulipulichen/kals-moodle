@@ -2,7 +2,13 @@
 
 unset($CFG);
 global $CFG;
+
+class MoodleObject {}
 $CFG = new stdClass();
+while (is_object($CFG) === FALSE) {
+    sleep(0.5);
+    $CFG = new stdClass();
+}
 
 $CFG->dbtype    = 'mysqli';
 $CFG->dblibrary = 'native';
@@ -22,12 +28,7 @@ if (isset($_SERVER['HTTPS'])) { $protocol='https://'; }
 if (isset($_SERVER['HTTP_HOST'])) { $hostname=$_SERVER['HTTP_HOST']; }
 $CFG->wwwroot = $protocol.$hostname;
 
-if (DIRECTORY_SEPARATOR === "\\") {
-    $CFG->dataroot  = 'D:\\xampp\\htdocs\\kals-moodle\\moodledata';
-}
-else {
-    $CFG->dataroot  = '/var/www/moodledata';
-}
+$CFG->dataroot  = '/var/www/moodledata';
 $CFG->admin     = 'admin';
 
 $CFG->directorypermissions = 0750;

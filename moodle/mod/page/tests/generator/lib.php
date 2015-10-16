@@ -84,14 +84,6 @@ class mod_page_generator extends phpunit_module_generator {
         if (!isset($record->printintro)) {
             $record->printintro = 0;
         }
-        
-        // KALS
-        if (!isset($record->kals_enable)) {
-            $record->kals_enable = 0;
-        }
-        if (!isset($record->kals_url)) {
-            $record->kals_url = "http://pc-pudding-2013.dlll.nccu.edu.tw/kals/web_apps/generic/loader";
-        }
 
         $record->coursemodule = $this->precreate_course_module($record->course, $options);
         $id = page_add_instance($record, null);
