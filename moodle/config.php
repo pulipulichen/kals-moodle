@@ -27,8 +27,29 @@ $hostname='127.0.0.1';
 if (isset($_SERVER['HTTPS'])) { $protocol='https://'; }
 if (isset($_SERVER['HTTP_HOST'])) { $hostname=$_SERVER['HTTP_HOST']; }
 $CFG->wwwroot = $protocol.$hostname;
+//$CFG->wwwroot = $protocol.$hostname . "/kals-moodle/moodle";
 
 $CFG->dataroot  = '/var/www/moodledata';
+
+/**
+ * 為了兼容Windows做的準備
+ * @author Pulipuli Chen
+ */
+if (DIRECTORY_SEPARATOR === "\\") {
+    $windows_dataroot = array(
+        'C:\xampp\htdocs\kals-moodle\moodle',
+        'D:\xampp\htdocs\kals-moodle\moodle'
+    );
+    foreach ($windows_dataroot AS $dataroot) {
+        if (is_dir($dataroot)) {
+            $CFG->dataroot  = $dataroot;
+            break;
+        }
+    }
+    
+    $CFG->wwwroot = $CFG->wwwroot . "/kals-moodle/moodle";
+    //echo $CFG->wwwroot;
+}
 $CFG->admin     = 'admin';
 
 $CFG->directorypermissions = 0750;

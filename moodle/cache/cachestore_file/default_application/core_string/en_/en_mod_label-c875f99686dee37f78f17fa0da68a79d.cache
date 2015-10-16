@@ -1,0 +1,7 @@
+a:8:{s:17:"label:addinstance";s:15:"Add a new label";s:9:"labeltext";s:10:"Label text";s:10:"modulename";s:5:"Label";s:15:"modulename_help";s:444:"The label module enables text and multimedia to be inserted into the course page in between links to other resources and activities. Labels are very versatile and can help to improve the appearance of a course if used thoughtfully.
+
+Labels may be used
+
+* To split up a long list of activities with a subheading or an image
+* To display an embedded sound file or video directly on the course page
+* To add a short description to a course section";s:15:"modulename_link";s:14:"mod/label/view";s:16:"modulenameplural";s:6:"Labels";s:20:"pluginadministration";s:20:"Label administration";s:10:"pluginname";s:5:"Label";}
