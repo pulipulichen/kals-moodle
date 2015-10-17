@@ -3625,7 +3625,7 @@ function file_pluginfile($relativepath, $forcedownload, $preview = null) {
     list($context, $course, $cm) = get_context_info_array($contextid);
 
     $fs = get_file_storage();
-
+    
     // ========================================================================================================================
     if ($component === 'blog') {
         // Blog file serving

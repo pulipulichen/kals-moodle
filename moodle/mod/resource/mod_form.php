@@ -148,6 +148,34 @@ class mod_resource_mod_form extends moodleform_mod {
             $mform->addElement('select', 'legacyfiles', get_string('legacyfiles', 'resource'), $options);
             $mform->setAdvanced('legacyfiles', 1);
         }
+        
+        /**
+         * 加上KALS_CONFIG的設定
+         * @author Pulipuli Chen <pulipuli.chen@gmail.com> 20151017
+         */
+        $mform->addElement('header', 'kals_section', get_string('kals_header', 'resource'));
+        
+        $mform->addElement('textarea', 'kals_config', get_string('kals_config', 'resource')
+                , array('style'=>"width:100%;height: 20em;")
+        );
+        
+        if (isset($config->kals_config)) {
+            $mform->setDefault('kals_config', $config->kals_config);
+        }
+        else {
+            $wwwroot = $CFG->wwwroot;
+            $wwwroot = parse_url($wwwroot, PHP_URL_PATH);
+            
+            //預設值
+            $mform->setDefault('kals_config', '{
+    /**
+     * 預設登入帳號的網址
+     */
+    "user_email": "'. $wwwroot .'/user.php"
+}');
+        }
+        //error_log("加上KALS_CONFIG的設定: $config->kals_config" );
+        //$mform->setDefault('kals_config', "mod_form.php");
 
         //-------------------------------------------------------
         $this->standard_coursemodule_elements();
@@ -193,6 +221,16 @@ class mod_resource_mod_form extends moodleform_mod {
             } else {
                 $default_values['showtype'] = 0;
             }
+            
+            /**
+             * @author Pulipuli Chen <pulipuli.chen@gmail.com> 20151017
+             */
+            if (!empty($displayoptions['kals_config'])) {
+                $default_values['kals_config'] = $displayoptions['kals_config'];
+            }
+            //else {
+            //    $default_values['kals_config'] = "data_preprocessing";
+            //}
         }
     }
 

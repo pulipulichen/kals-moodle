@@ -101,10 +101,13 @@ function resource_display_embed($resource, $cm, $course, $file) {
     resource_print_header($resource, $cm, $course);
     resource_print_heading($resource, $cm, $course);
 
+    echo '<div style="text-align:center"><a href="'.$fullurl.'" target="_blank"><button type="button">Open in new window</button></a></div>';
+    echo "\n\n<!-- content hash: [" . $file->get_contenthash(). "] -->";
+    
     echo $code;
 
     resource_print_intro($resource, $cm, $course);
-    echo '<a href="'.$fullurl.'" target="_blank">Open in new window.</a>';
+    echo '<div style="text-align:center"><a href="'.$fullurl.'" target="_blank"><button type="button">Open in new window</button></a></div>';
     echo "\n\n<!-- content hash: [" . $file->get_contenthash(). "] -->";
 
     echo $OUTPUT->footer();

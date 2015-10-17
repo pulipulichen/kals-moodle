@@ -24,6 +24,8 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+header("Content-Type: application/javascript");
+
 require('config.php');
 require_once($CFG->dirroot.'/mod/page/locallib.php');
 require_once($CFG->libdir.'/completionlib.php');

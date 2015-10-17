@@ -47,6 +47,7 @@ if (DIRECTORY_SEPARATOR === "\\") {
         }
     }
     
+    //$CFG->wwwroot = $CFG->wwwroot . "/kals-moodle/moodle";
     $CFG->wwwroot = $CFG->wwwroot . "/kals-moodle/moodle";
     //echo $CFG->wwwroot;
 }

@@ -47,6 +47,10 @@ if ($r) {
     $resource = $DB->get_record('resource', array('id'=>$cm->instance), '*', MUST_EXIST);
 }
 
+/**
+ * 不管怎樣，就是不使用版本控制
+ * @author Pulipuli Chen <pulipuli.chen@gmail.com> 20151017
+ */
 //$revisionenable = $options['revisionenable'];
 //if ($revisionenable === '0') {
     $resource->revision = 0;

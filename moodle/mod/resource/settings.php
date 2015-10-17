@@ -84,4 +84,12 @@ if ($ADMIN->fulltree) {
     $settings->add(new admin_setting_configselect_with_advanced('resource/filterfiles',
         get_string('filterfiles', 'resource'), get_string('filterfilesexplain', 'resource'),
         array('value'=>0, 'adv'=>true), $options));
+    
+    /**
+     * KALS_COFNG
+     * @author Pulipuli Chen <pulipuli.chen@gmail.com> 20151017
+     */
+     $settings->add(new admin_setting_configtext_with_advanced('resource/kals_config',
+        get_string('kals_config', 'resource'), get_string('kals_configexplain', 'resource'),
+        array('value'=>"settings", 'adv'=>false)));
 }

@@ -41,6 +41,7 @@ function resource_supports($feature) {
         case FEATURE_GRADE_OUTCOMES:          return false;
         case FEATURE_BACKUP_MOODLE2:          return true;
         case FEATURE_SHOW_DESCRIPTION:        return true;
+        case FEATURE_KALS_CONFIG:                return true;
 
         default: return null;
     }
@@ -113,8 +114,15 @@ function resource_update_instance($data, $mform) {
     require_once("$CFG->libdir/resourcelib.php");
     $data->timemodified = time();
     $data->id           = $data->instance;
+    
+    /**
+     * 把revision拿掉，這樣網址就不會有版本的問題了
+     * @author Pulipuli Chen <pulipuli.chen@gmail.com> 20151017
+     */
     $data->revision++;
-
+    
+    error_log("resource_update_instance: " . json_encode($data) );
+    
     resource_set_display_options($data);
 
     $DB->update_record('resource', $data);
@@ -148,6 +156,20 @@ function resource_set_display_options($data) {
     if (!empty($data->revisionenable)) {
         $displayoptions['revisionenable'] = 1;
     }
+    
+    /**
+     * kals_config儲存設定
+     * @author Pulipuli Chen <pulipuli.chen@gmail.com> 20151017
+     */
+    if (!empty($data->kals_config)) {
+        $displayoptions['kals_config'] = $data->kals_config;
+    }
+    else {
+        // kals_config預設值
+        $displayoptions['kals_config'] = "{}";
+    }
+    //error_log("resource_set_display_options: $data->kals_config");
+    
     $data->displayoptions = serialize($displayoptions);
 }
 
@@ -276,7 +298,6 @@ function resource_get_coursemodule_info($coursemodule) {
     } else if ($display == RESOURCELIB_DISPLAY_NEW) {
         $fullurl = "$CFG->wwwroot/mod/resource/view.php?id=$coursemodule->id&amp;redirect=1";
         $info->onclick = "window.open('$fullurl'); return false;";
-
     }
 
     // If any optional extra details are turned on, store in custom data
@@ -519,6 +540,13 @@ function resource_dndupload_handle($uploadinfo) {
     $data->showtype = (isset($config->showtype)) ? $config->showtype : 0;
     $data->revisionenable = (isset($config->revisionenable)) ? $config->revisionenable : 0;
     $data->filterfiles = $config->filterfiles;
+    
+    /**
+     * KALS_CONFIG
+     * @author Pulipuli Chen <pulipuli.chen@gmail.com> 20151017
+     */
+    //$data->kals_config = (isset($config->kals_config)) ? $config->kals_config : "resource_dndupload_handle";
+    $data->kals_config = "resource_dndupload_handle";
 
     return resource_add_instance($data, null);
 }

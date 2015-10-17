@@ -110,3 +110,7 @@ $string['showtype_help'] = 'Displays the type of the file, such as \'Word docume
 If there are multiple files in this resource, the start file type is displayed.
 
 If the file type is not known to the system, it will not display.';
+
+$string['kals_header'] = "KALS合作式知識標註學習系統設定";
+$string['kals_config'] = "KALS Configuration";
+$string['kals_configexplain'] = "KALS Configuration";
