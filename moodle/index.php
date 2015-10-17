@@ -34,7 +34,7 @@
     require_once($CFG->libdir .'/filelib.php');
 
     /**
-     * å¼·è¿«ç™»å…¥
+     * ±j­¢µn¤J
      * @author Pulipuli Chen <pulipuli.chen@gmail.com> 20151016
      */
     if (!isloggedin()) {
