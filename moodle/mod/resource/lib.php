@@ -41,7 +41,6 @@ function resource_supports($feature) {
         case FEATURE_GRADE_OUTCOMES:          return false;
         case FEATURE_BACKUP_MOODLE2:          return true;
         case FEATURE_SHOW_DESCRIPTION:        return true;
-        case FEATURE_KALS_CONFIG:                return true;
 
         default: return null;
     }
@@ -121,8 +120,6 @@ function resource_update_instance($data, $mform) {
      */
     $data->revision++;
     
-    error_log("resource_update_instance: " . json_encode($data) );
-    
     resource_set_display_options($data);
 
     $DB->update_record('resource', $data);
@@ -167,6 +164,17 @@ function resource_set_display_options($data) {
     else {
         // kals_config預設值
         $displayoptions['kals_config'] = "{}";
+    }
+    
+//    error_log("resource_set_display_options: " . empty($data->enable_kals));
+//    if (empty($data->enable_kals)) {
+//        $displayoptions['enable_kals'] = "false";
+//    }
+//    else {
+//        $displayoptions['enable_kals'] = "true";
+//    }
+    if (!empty($data->disable_kals)) {
+        $displayoptions['disable_kals'] = 1;
     }
     //error_log("resource_set_display_options: $data->kals_config");
     
@@ -401,7 +409,7 @@ function resource_get_file_info($browser, $areas, $course, $cm, $context, $filea
 function resource_pluginfile($course, $cm, $context, $filearea, $args, $forcedownload, array $options=array()) {
     global $CFG, $DB;
     require_once("$CFG->libdir/resourcelib.php");
-
+    
     if ($context->contextlevel != CONTEXT_MODULE) {
         return false;
     }
@@ -456,8 +464,37 @@ function resource_pluginfile($course, $cm, $context, $filearea, $args, $forcedow
         $filter = 0;
     }
 
-    // finally send the file
-    send_stored_file($file, 86400, $filter, $forcedownload, $options);
+    $resource_full = $DB->get_record('resource', array('id'=>$cm->instance), '*', MUST_EXIST);
+    $options = empty($resource_full->displayoptions) ? array() : unserialize($resource_full->displayoptions);
+    $disable_kals = $options["disable_kals"];
+    
+    //error_log("plugingfile: " . $resource_full->displayoptions . "!" .  $disable_kals);
+    if (($mimetype === 'text/html')
+            && $disable_kals !== 1) {
+        echo $file->get_content();
+        echo '
+<!-- [KALS] -->
+<script type="text/javascript" src="' . $CFG->kals_config["kals_url"] . '/web_apps/generic/loader/release"></script>
+<script type="text/javascript">
+KALS_CONFIG = {
+    kals_config_api: function () {
+		var _pathname = window.location.pathname;
+		var _parts = _pathname.split("/pluginfile.php/");
+		var _base_path = _parts[0];
+		var _context_id = _parts[1].substr(0, _parts[1].indexOf("/"));
+		var _kals_config_api = _base_path + "/mod/resource/kals_config.php?context_id=" + _context_id;
+		return _kals_config_api;
+	}
+};
+
+</script>
+<!-- [/KALS] -->';
+        die;
+    }
+    else {
+        // finally send the file
+        send_stored_file($file, 86400, $filter, $forcedownload, $options);
+    }
 }
 
 /**
@@ -538,15 +575,9 @@ function resource_dndupload_handle($uploadinfo) {
     $data->printintro = $config->printintro;
     $data->showsize = (isset($config->showsize)) ? $config->showsize : 0;
     $data->showtype = (isset($config->showtype)) ? $config->showtype : 0;
+    $data->disable_kals = (isset($config->disable_kals)) ? $config->disable_kals : 0;
     $data->revisionenable = (isset($config->revisionenable)) ? $config->revisionenable : 0;
     $data->filterfiles = $config->filterfiles;
     
-    /**
-     * KALS_CONFIG
-     * @author Pulipuli Chen <pulipuli.chen@gmail.com> 20151017
-     */
-    //$data->kals_config = (isset($config->kals_config)) ? $config->kals_config : "resource_dndupload_handle";
-    $data->kals_config = "resource_dndupload_handle";
-
     return resource_add_instance($data, null);
 }

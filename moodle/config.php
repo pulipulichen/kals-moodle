@@ -51,11 +51,45 @@ if (DIRECTORY_SEPARATOR === "\\") {
     $CFG->wwwroot = $CFG->wwwroot . "/kals-moodle/moodle";
     //echo $CFG->wwwroot;
 }
+
 $CFG->admin     = 'admin';
 
 $CFG->directorypermissions = 0750;
 
 $CFG->passwordsaltmain = '800e8e9b661714d756e50acbc94a7ea7';
+
+/**
+ * KALS相關的設定，全站統一
+ * @author Pulipuli Chen <pulipuli.chen@gmail.com> 20151017
+ */
+$CFG->kals_config = array(
+    "kals_url" => "/kals",
+    "kals_converter_url" => "",
+    "kals_config" => '{
+    /**
+     * 從其他檔案讀取設定檔
+     * @author Pulipuli Chen 20151017
+     * @type String
+     */
+    kals_config_api: function () {
+		var _pathname = window.location.pathname;
+		var _parts = _pathname.split("/pluginfile.php/");
+		var _base_path = _parts[0];
+		var _context_id = _parts[1].substr(0, _parts[1].indexOf("/"));
+		var _kals_config_api = _base_path + "/mod/resource/kals_config.php?context_id=" + _context_id;
+		return _kals_config_api;
+	}
+}'
+);
+
+/**
+ * 為了兼容Windows做的準備
+ * @author Pulipuli Chen
+ */
+if (DIRECTORY_SEPARATOR === "\\") { 
+    $CFG->kals_config["kals_url"] = "/kals";
+    $CFG->kals_config["kals_converter_url"] = "/php-file-converter";
+}
 
 require_once(dirname(__FILE__) . '/lib/setup.php');
 

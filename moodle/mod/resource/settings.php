@@ -92,4 +92,7 @@ if ($ADMIN->fulltree) {
      $settings->add(new admin_setting_configtext_with_advanced('resource/kals_config',
         get_string('kals_config', 'resource'), get_string('kals_configexplain', 'resource'),
         array('value'=>"settings", 'adv'=>false)));
+     $settings->add(new admin_setting_configcheckbox_with_advanced('resource/kals_config',
+            get_string('kals_config', 'resource'), get_string('kals_config_desc', 'resource'),
+            array('value'=>0, 'adv'=>false)));
 }
