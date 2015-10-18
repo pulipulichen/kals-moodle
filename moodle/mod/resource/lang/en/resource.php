@@ -111,7 +111,7 @@ If there are multiple files in this resource, the start file type is displayed.
 
 If the file type is not known to the system, it will not display.';
 
-$string['kals_header'] = "KALS合作式知識標註學習系統設定";
+$string['kals_header'] = "KALS Options";
 $string['disable_kals'] = "Disable KALS";
 $string['pdf2htmlex'] = "Convert PDF to HTML";
 $string['kals_url'] = "KALS base URL";
@@ -122,3 +122,4 @@ $string['kals_converter_url'] = "KALS converter URL";
 $string['kals_converter_urlexplain'] = "KALS converter URL";
 $string['kals_config_api'] = "KALS configuration API";
 $string['kals_config_apiexplain'] = "KALS configuration API";
+$string['kals_config_manual'] = "KALS configuration Manual";

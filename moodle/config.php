@@ -80,6 +80,15 @@ $CFG->kals_config = array(
 		var _kals_config_api = _base_path + "/mod/resource/kals_config.php?context_id=" + _context_id;
 		return _kals_config_api;
 	}
+}', 
+    /**
+     * 可以改變的KALS_CONFIG
+     */
+    "kals_config_api" => '{
+    /**
+     * 預設登入帳號的網址
+     */
+    "user_email": "'. parse_url($CFG->wwwroot, PHP_URL_PATH) .'/user.php"
 }'
 );
 

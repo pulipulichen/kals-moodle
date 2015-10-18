@@ -173,19 +173,12 @@ class mod_resource_mod_form extends moodleform_mod {
         $mform->setDefault('kals_config', $config->kals_config);
         if (isset($config->kals_config)) {
             $mform->setDefault('kals_config', $config->kals_config);
-        }
-        else {
-            $wwwroot = $CFG->wwwroot;
-            $wwwroot = parse_url($wwwroot, PHP_URL_PATH);
-            
+        } else {
             //預設值
-            $mform->setDefault('kals_config', '{
-    /**
-     * 預設登入帳號的網址
-     */
-    "user_email": "'. $wwwroot .'/user.php"
-}');
-        }        
+            $mform->setDefault('kals_config', $CFG->kals_config["kals_config_api"]);
+        }
+        $mform->addElement('static', 'kals_config_manual', ""
+                    , '<a href="https://github.com/pulipulichen/kals/blob/master/system/application/views/web_apps/core/KALS_CONFIG.js" target="kals_config_help">' .  get_string('kals_config_manual', 'resource') . '</a>');
         
         //error_log("加上KALS_CONFIG的設定: $config->kals_config" );
         //$mform->setDefault('kals_config', "mod_form.php");
