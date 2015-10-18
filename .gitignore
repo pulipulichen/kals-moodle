@@ -1,10 +1,1 @@
 /doc/*
-/theme/
-/moodle/cache/cachestore_file/default_application/core_databasemeta/
-/moodle/cache/cachestore_file/default_application/core_htmlpurifier/
-/moodle/cache/cachestore_file/default_application/core_string/
-/moodle/cache/htmlpurifier/
-/moodle/cache/js/
-/moodle/cache/theme/
-/moodle/cache/
-/moodle/filedir/

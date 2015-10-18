@@ -1249,6 +1249,7 @@ body#page-mod-questionnaire-view td.qnType, body#page-mod-questionnaire-preview 
     min-height: 400px;
     margin-bottom: 20px;
 }
+
 .mobileresource {
     border: 1px solid #666;
     z-index: 99999;

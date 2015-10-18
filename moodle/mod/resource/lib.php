@@ -488,7 +488,11 @@ KALS_CONFIG = {
 };
 
 </script>
-<!-- [/KALS] -->';
+<!-- [/KALS] -->
+<style="text/css">
+body {background-color:transparent;}
+</style>
+';
         die;
     }
     else {

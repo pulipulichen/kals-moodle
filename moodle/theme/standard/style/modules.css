@@ -173,7 +173,7 @@ table.mod_index {width:90%;margin:1em auto;}
 .path-mod-page .modified {font-size:0.6em;}
 
 /** Resource **/
-#page-mod-resource-view .resourcecontent {text-align:center;margin:20px;}
+#page-mod-resource-view .resourcecontent {text-align:center;margin:20px 0;}
 #page-mod-resource-view .resourcecontent.resourcepdf {padding-top: 15px;text-align: center;}
 .path-mod-resource .modified {text-align:center;font-size:0.6em;}
 

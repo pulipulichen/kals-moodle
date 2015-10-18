@@ -64,7 +64,8 @@ $CFG->passwordsaltmain = '800e8e9b661714d756e50acbc94a7ea7';
  */
 $CFG->kals_config = array(
     "kals_url" => "/kals",
-    "kals_converter_url" => "",
+    "kals_converter_url" => "http://public-pdf2html-2013.dlll.nccu.edu.tw/iframe",
+    "kals_converter_height" => 180,
     "kals_config" => '{
     /**
      * 從其他檔案讀取設定檔
@@ -88,7 +89,7 @@ $CFG->kals_config = array(
  */
 if (DIRECTORY_SEPARATOR === "\\") { 
     $CFG->kals_config["kals_url"] = "/kals";
-    $CFG->kals_config["kals_converter_url"] = "/php-file-converter";
+    $CFG->kals_config["kals_converter_url"] = "/php-file-converter/iframe";
 }
 
 require_once(dirname(__FILE__) . '/lib/setup.php');

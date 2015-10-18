@@ -68,6 +68,15 @@ class mod_resource_mod_form extends moodleform_mod {
 
         $mform->addElement('filemanager', 'files', get_string('selectfiles'), null, $filemanager_options);
 
+        //$mform->addElement('button', 'pdf2htmlex', get_string('pdf2htmlex', 'resource')
+        //        , array('onclick'=> 'window.open("'. $CFG->kals_config["kals_converter_url"] .'")'));
+        //$mform->addElement('iframe', 'pdf2htmlex', get_string('pdf2htmlex', 'resource')
+        //        , array('src'=> $CFG->kals_config["kals_converter_url"]));
+        if (isset($CFG->kals_config["kals_converter_url"])) {
+            $mform->addElement('static', 'pdf2htmlex', ""
+                    , '<hr /><iframe src="'.$CFG->kals_config["kals_converter_url"].'" frameborder="0" width="100%" height="'.$CFG->kals_config["kals_converter_height"].'" scrolling="auto"></iframe>');
+        }
+                
         //-------------------------------------------------------
         $mform->addElement('header', 'optionssection', get_string('optionsheader', 'resource'));
 

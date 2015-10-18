@@ -113,6 +113,7 @@ If the file type is not known to the system, it will not display.';
 
 $string['kals_header'] = "KALS合作式知識標註學習系統設定";
 $string['disable_kals'] = "Disable KALS";
+$string['pdf2htmlex'] = "Convert PDF to HTML";
 $string['kals_url'] = "KALS base URL";
 $string['kals_urlexplain'] = "KALS base URL";
 $string['kals_config'] = "KALS configuration";
