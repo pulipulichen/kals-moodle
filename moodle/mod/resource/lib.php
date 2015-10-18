@@ -508,6 +508,11 @@ function resource_kals_render($file) {
     // 輸出文件內容
     echo $output;
     
+    $has_title = true;
+    if (strpos($output, "<title>") === FALSE) {
+        $has_title = false;
+    }
+    
     echo '
 <!-- [KALS] -->
 <script type="text/javascript" src="' . $CFG->kals_config["kals_url"] . '/web_apps/generic/loader/release"></script>
@@ -529,6 +534,15 @@ kals_config_api: function () {
 body {background-color:transparent;}
 </style>
 ';
+    if ($has_title === false) {
+        $filename = $file->get_filename();
+        $dot_pos = strrpos($filename, ".");
+        if ($dot_pos !== FALSE) {
+            $filename = substr($filename, 0 , strrpos($filename, "."));
+        }
+        //echo '<title>' . $filename . '</title>';
+        echo '<script type="text/javascript">document.title="'.$filename.'"</script>';
+    }
     die;
 }
 
