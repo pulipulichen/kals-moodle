@@ -159,6 +159,15 @@ function resource_set_display_options($data) {
      * @author Pulipuli Chen <pulipuli.chen@gmail.com> 20151017
      */
     if (!empty($data->kals_config)) {
+        // 檢查kals_config是否符合規格
+        $pattern = '/(?:(?:\/\*(?:[^*]|(?:\*+[^*\/]))*\*+\/)|(?:(?<!\:|\\\|\')\/\/.*))/';
+        $data->kals_config = preg_replace($pattern, '', $data->kals_config);
+        json_decode($data->kals_config);
+        if (json_last_error() !== JSON_ERROR_NONE) {
+            print_error('resource kals config format error: <div><pre>' . $data->kals_config . "</pre></div>");
+            die();
+        }
+        
         $displayoptions['kals_config'] = $data->kals_config;
     }
     else {

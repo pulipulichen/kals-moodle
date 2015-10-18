@@ -632,8 +632,12 @@ if ($mform->is_cancelled()) {
             $returnurl = new moodle_url("/mod/$module->name/view.php", array('id' => $fromform->coursemodule));
             redirect($gradingman->get_management_url($returnurl));
         }
-    } else {
+    } else if (isset($fromform->submitbutton2)) {
         redirect(course_get_url($course, $cw->section, array('sr' => $sectionreturn)));
+    }
+    else {
+        //http://localhost/kals-moodle/moodle/course/modedit.php?update=282&return=1&sesskey=MnG9j1FC4R
+        redirect($CFG->wwwroot . "/course/modedit.php?update=" . $fromform->coursemodule);
     }
     exit;
 

@@ -849,6 +849,14 @@ abstract class moodleform_mod extends moodleform {
         if ($submitlabel !== false) {
             $buttonarray[] = &$mform->createElement('submit', 'submitbutton', $submitlabel);
         }
+        
+        if (is_null($submit3label)) {
+            $submit3label = get_string('applychanges');
+        }
+        
+        if ($submit3label !== false) {
+            $buttonarray[] = &$mform->createElement('submit', 'submitbutton3', $submit3label);
+        }
 
         if ($cancel) {
             $buttonarray[] = &$mform->createElement('cancel');

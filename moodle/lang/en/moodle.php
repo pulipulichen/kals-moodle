@@ -1440,6 +1440,7 @@ $string['savedat'] = 'Saved at:';
 $string['savechanges'] = 'Save changes';
 $string['savechangesanddisplay'] = 'Save and display';
 $string['savechangesandreturntocourse'] = 'Save and return to course';
+$string['applychanges'] = 'Apply';
 $string['savecomment'] = 'Save comment';
 $string['savepreferences'] = 'Save preferences';
 $string['saveto'] = 'Save to';
