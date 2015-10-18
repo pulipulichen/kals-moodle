@@ -1,4 +1,4 @@
-<?php
+ï»¿<?php
 
 // This file is part of Moodle - http://moodle.org/
 //
@@ -34,11 +34,16 @@
     require_once($CFG->libdir .'/filelib.php');
 
     /**
-     * ±j­¢µn¤J
+     * å¼·è¿«ç™»å…¥
      * @author Pulipuli Chen <pulipuli.chen@gmail.com> 20151016
      */
-    if (!isloggedin()) {
-        header('Location: login/');
+//    if (!isloggedin()) {
+//        header('Location: login/');
+//        die;
+//    }
+    require_login();
+    if (isloggedin()) {
+        header('Location: course/index.php?categoryedit=off');
         die;
     }
     
