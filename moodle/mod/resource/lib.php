@@ -471,20 +471,47 @@ function resource_pluginfile($course, $cm, $context, $filearea, $args, $forcedow
     //error_log("plugingfile: " . $resource_full->displayoptions . "!" .  $disable_kals);
     if (($mimetype === 'text/html')
             && $disable_kals !== 1) {
-        echo $file->get_content();
-        echo '
+        resource_kals_render($file);
+    }
+    else {
+        // finally send the file
+        send_stored_file($file, 86400, $filter, $forcedownload, $options);
+    }
+}
+
+/**
+ * 不使用預設的輸出，而是搭配KALS的輸出
+ * @author Pulipuli Chen <pulipuli.chen@gmail.com> 20151018
+ * @param type $file
+ */
+function resource_kals_render($file) {
+    global $CFG;
+    $output = $file->get_content();
+    
+    // 如果不是UTF8，改成UTF8
+    if (mb_detect_encoding($output, 'UTF-8', true) === false) {
+        $output = iconv(mb_detect_encoding($output, mb_detect_order(), true), "UTF-8", $output);
+    }
+    
+    // 標頭輸出UTF-8
+    header("Content-Type:text/html; charset=utf-8");
+    
+    // 輸出文件內容
+    echo $output;
+    
+    echo '
 <!-- [KALS] -->
 <script type="text/javascript" src="' . $CFG->kals_config["kals_url"] . '/web_apps/generic/loader/release"></script>
 <script type="text/javascript">
 KALS_CONFIG = {
-    kals_config_api: function () {
-		var _pathname = window.location.pathname;
-		var _parts = _pathname.split("/pluginfile.php/");
-		var _base_path = _parts[0];
-		var _context_id = _parts[1].substr(0, _parts[1].indexOf("/"));
-		var _kals_config_api = _base_path + "/mod/resource/kals_config.php?context_id=" + _context_id;
-		return _kals_config_api;
-	}
+kals_config_api: function () {
+            var _pathname = window.location.pathname;
+            var _parts = _pathname.split("/pluginfile.php/");
+            var _base_path = _parts[0];
+            var _context_id = _parts[1].substr(0, _parts[1].indexOf("/"));
+            var _kals_config_api = _base_path + "/mod/resource/kals_config.php?context_id=" + _context_id;
+            return _kals_config_api;
+    }
 };
 
 </script>
@@ -493,12 +520,7 @@ KALS_CONFIG = {
 body {background-color:transparent;}
 </style>
 ';
-        die;
-    }
-    else {
-        // finally send the file
-        send_stored_file($file, 86400, $filter, $forcedownload, $options);
-    }
+    die;
 }
 
 /**
