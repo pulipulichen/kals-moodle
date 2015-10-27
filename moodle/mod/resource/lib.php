@@ -526,14 +526,7 @@ function resource_kals_render($file) {
 <script type="text/javascript" src="' . $CFG->kals_config["kals_url"] . '/web_apps/generic/loader/release"></script>
 <script type="text/javascript">
 KALS_CONFIG = {
-kals_config_api: function () {
-            var _pathname = window.location.pathname;
-            var _parts = _pathname.split("/pluginfile.php/");
-            var _base_path = _parts[0];
-            var _context_id = _parts[1].substr(0, _parts[1].indexOf("/"));
-            var _kals_config_api = _base_path + "/mod/resource/kals_config.php?context_id=" + _context_id;
-            return _kals_config_api;
-    }
+    '.$CFG->kals_config["kals_config"].'
 };
 
 </script>

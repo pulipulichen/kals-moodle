@@ -58,31 +58,69 @@ if ($r) {
     $resource = $DB->get_record('resource', array('id'=>$cm->instance), '*', MUST_EXIST);
 }
 
-//echo $resource->kals_config;
-//print_r($resource->displayoptions["kals_config"]);
-//print_r($resource->displayoptions);
+//function convert_to_json_object($config) {
+//    $pattern = '/(?:(?:\/\*(?:[^*]|(?:\*+[^*\/]))*\*+\/)|(?:(?<!\:|\\\|\')\/\/.*))/';
+//
+//    $config = trim($config);
+//    if (substr($config, -1 , 1) === ",") {
+//        $config = substr($config, 0, -1);
+//    }
+//    $config = "{".$config."}";
+//    $config = preg_replace($pattern, '', $config);
+//    //$object = json_decode($config, JSON_UNESCAPED_SLASHES);
+//    echo $config;
+//    $object = json_decode($config);
+//    return $object;
+//}
+//
+////echo $resource->kals_config;
+////print_r($resource->displayoptions["kals_config"]);
+////print_r($resource->displayoptions);
+//$options = empty($resource->displayoptions) ? array() : unserialize($resource->displayoptions);
+//$kals_config = $options["kals_config"];
+//$kals_config_json = convert_to_json_object($kals_config);
+//
+//$CFG_kals_config = $CFG->kals_config["kals_config_api"];
+//
+//$CFG_kals_config_json = convert_to_json_object($CFG_kals_config);
+//print_r($CFG_kals_config_json);
+//
+////foreach ($kals_config_json AS $key => $value) {
+////   
+// 
+////    if ($key !== "modules") {
+////        $CFG_kals_config_json[$key] = $value;
+////    }
+////    else {
+////        $CFG_modules = $CFG_kals_config_json[$key];
+////        $modules = $value;
+////        foreach ($modules as $key => $value) {
+////            $CFG_modules[$key] = $modules[$key];
+////        }
+////        $CFG_kals_config_json["modules"] = $CFG_modules;
+////    }
+////}
+//print_r($CFG_kals_config_json);
+//$kals_config = json_encode($CFG_kals_config_json, JSON_UNESCAPED_SLASHES+JSON_UNESCAPED_UNICODE);
+
+
+function convert_to_json($config) {
+    $pattern = '/(?:(?:\/\*(?:[^*]|(?:\*+[^*\/]))*\*+\/)|(?:(?<!\:|\\\|\')\/\/.*))/';
+
+    $config = trim($config);
+    if (substr($config, -1 , 1) === ",") {
+        $config = substr($config, 0, -1);
+    }
+    $config = "{".$config."}";
+    $config = preg_replace($pattern, '', $config);
+    return $config;
+}
+
 $options = empty($resource->displayoptions) ? array() : unserialize($resource->displayoptions);
 $kals_config = $options["kals_config"];
 
-$kals_config = trim($kals_config);
-if (substr($kals_config, -1, 1) === ",") {
-    $kals_config = substr($kals_config, 0, -1);
-}
-$kals_config = "{".$kals_config."}";
-$pattern = '/(?:(?:\/\*(?:[^*]|(?:\*+[^*\/]))*\*+\/)|(?:(?<!\:|\\\|\')\/\/.*))/';
-$kals_config = preg_replace($pattern, '', $kals_config);
-
-function isJson($string) {
-    json_decode($string);
-    return (json_last_error() == JSON_ERROR_NONE);
-}
-
-json_decode($kals_config);
 if (json_last_error() == JSON_ERROR_NONE) {
-    echo "{";
-    echo $CFG->kals_config["kals_config_api"];
-    echo $options["kals_config"];    
-    echo "}";
+    echo convert_to_json($kals_config); 
 }
 else {
     print_error('resource kals config format error: ' . $kals_config);
