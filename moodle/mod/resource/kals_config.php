@@ -64,6 +64,11 @@ if ($r) {
 $options = empty($resource->displayoptions) ? array() : unserialize($resource->displayoptions);
 $kals_config = $options["kals_config"];
 
+$kals_config = trim($kals_config);
+if (substr($kals_config, -1, 1) === ",") {
+    $kals_config = substr($kals_config, 0, -1);
+}
+$kals_config = "{".$kals_config."}";
 $pattern = '/(?:(?:\/\*(?:[^*]|(?:\*+[^*\/]))*\*+\/)|(?:(?<!\:|\\\|\')\/\/.*))/';
 $kals_config = preg_replace($pattern, '', $kals_config);
 
@@ -74,7 +79,10 @@ function isJson($string) {
 
 json_decode($kals_config);
 if (json_last_error() == JSON_ERROR_NONE) {
-    echo $kals_config;
+    echo "{";
+    echo $CFG->kals_config["kals_config_api"];
+    echo $options["kals_config"];    
+    echo "}";
 }
 else {
     print_error('resource kals config format error: ' . $kals_config);

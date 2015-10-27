@@ -175,7 +175,7 @@ class mod_resource_mod_form extends moodleform_mod {
             $mform->setDefault('kals_config', $config->kals_config);
         } else {
             //預設值
-            $mform->setDefault('kals_config', $CFG->kals_config["kals_config_api"]);
+            //$mform->setDefault('kals_config', $CFG->kals_config["kals_config_api"]);
         }
         $mform->addElement('static', 'kals_config_manual', ""
                     , '<a href="https://github.com/pulipulichen/kals/blob/master/system/application/views/web_apps/core/KALS_CONFIG.js" target="kals_config_help">' .  get_string('kals_config_manual', 'resource') . '</a>');
